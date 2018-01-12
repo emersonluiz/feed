@@ -1,0 +1,22 @@
+{
+  "name": "feed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Emerson Luiz de Castro",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4",
+    "feed-read-parser": "0.0.6",
+    "feedparser": "^2.2.1",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0"
+  }
+}
