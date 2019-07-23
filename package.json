@@ -14,7 +14,8 @@
     "express": "^4.15.4",
     "feed-read-parser": "0.0.6",
     "feedparser": "^2.2.1",
-    "xml2js": "^0.4.19"
+    "xml2js": "^0.4.19",
+    "body-parser": "^1.15.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

@@ -2,6 +2,8 @@ var express = require('express');
 var request = require('request');
 var parseString = require('xml2js').parseString;
 
+import bodyParser from 'body-parser';
+
 const app = express();
 
 //const url1 = 'http://www.gazetadopovo.com.br/rss/economia/nova-economia';
@@ -12,6 +14,8 @@ const url3 = 'https://economia.awesomeapi.com.br/json/all';
 
 app.use(express.static('./public_html/'));
 
+app.use(bodyParser.json());
+
 var rss = [];
 
 var transform = function(xml, res) {
@@ -20,11 +24,13 @@ var transform = function(xml, res) {
         try {
             for(var i=0; i<json.rss.channel[0].item.length; i++) {
                 var obj = {image:"", title:"", description:""};
+		var url = "";
                 if(json.rss.channel[0].item[i].image != null) {
                     if(json.rss.channel[0].item[i].image[0].url == undefined) {
-                        url = encodeURI("http://www.gazetadopovo.com.br" + json.rss.channel[0].item[i].image[0]);
+                        url = encodeURI("https://www.gazetadopovo.com.br" + json.rss.channel[0].item[i].image[0]);
                     } else {
-                        url = encodeURI("http://www.gazetadopovo.com.br" + json.rss.channel[0].item[i].image[0].url[0]);
+console.log('xxxx', json.rss.channel[0].item[i].image[0].url)
+                        url = json.rss.channel[0].item[i].image[0].url;
                     }
                 }
                 obj.image = url;
@@ -33,9 +39,10 @@ var transform = function(xml, res) {
                 rss.push(obj);
             }
         } catch(err) {
+console.log("error", err)
             console.log("Can't parser");
         }
-        console.log(result);
+       // console.log(result);
         res.send(JSON.stringify(rss));
         return
     });
@@ -43,6 +50,8 @@ var transform = function(xml, res) {
 
 app.get('/noticias/economia', (req, res) => {
     request.get(url1, (err, response) => {
+//console.log(url1)
+//console.log(response.body)
         transform(response.body, res)
         return
     })
@@ -50,6 +59,8 @@ app.get('/noticias/economia', (req, res) => {
 
 app.get('/noticias/agronegocio', (req, res) => {
     request.get(url2, (err, response) => {
+//console.log(url2)
+//console.log(response.body)
         transform(response.body, res)
         return
     })

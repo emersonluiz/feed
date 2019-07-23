@@ -71,17 +71,21 @@ function noticias(index) {
 	}
 
 	let url = "";
-	if(json[index].image != null) {
+	if(json[index] && json[index].image != null) {
 		document.body.style.backgroundImage = "url('" + json[index].image +"')";
-		document.body.style.backgroundPosition = "center  top";
+		document.body.style.backgroundPosition = "center top";
 		document.body.style.backgroundSize = "100% auto";
+		document.body.style.backgroundRepeat = "no-repeat";
 	} else {
 		document.body.style.background = "#6495ED";
 	}
-	
-	if(json[index].description != "") {
-		document.getElementById("legend").innerHTML = "<h1 style='color: #FFF; font-size: 40px'>"+json[index].title+"</h1>"+
-													  "<h2 style='color: #FFF; font-size: 28px'>"+json[index].description+"</h2>";
-	}
-	return ++index;
+	console.log(json[index])
+	if(json[index]) {
+
+		if(json[index].description != "") {
+			document.getElementById("legend").innerHTML = "<h1 style='color: #FFF; font-size: 40px'>"+json[index].title+"</h1>"+
+														  "<h2 style='color: #FFF; font-size: 28px' class='desH2'>"+json[index].description+"</h2>";
+		}
+		return ++index;
+        }
 }
