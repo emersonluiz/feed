@@ -2,8 +2,6 @@ var express = require('express');
 var request = require('request');
 var parseString = require('xml2js').parseString;
 
-import bodyParser from 'body-parser';
-
 const app = express();
 
 //const url1 = 'http://www.gazetadopovo.com.br/rss/economia/nova-economia';
@@ -13,8 +11,6 @@ const url2 = 'https://www.gazetadopovo.com.br/feed/rss/agronegocio.xml';
 const url3 = 'https://economia.awesomeapi.com.br/json/all';
 
 app.use(express.static('./public_html/'));
-
-app.use(bodyParser.json());
 
 var rss = [];
 
